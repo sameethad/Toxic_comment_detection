@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instafeed - A Safe Social Experience</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>Instafeed</h1>
+                </div>
+                <div class="nav-actions">
+                    <div class="search">
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-avatar">
+                            <img src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=50" alt="User">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="feed">
+            {% for post in posts %}
+            <article class="post" data-post-id="{{ post.id }}">
+                <div class="post-header">
+                    <div class="user-info">
+                        <div class="avatar">
+                            <img src="{{ post.avatar }}" alt="{{ post.user }}">
+                        </div>
+                        <div class="username">{{ post.user }}</div>
+                    </div>
+                    <div class="post-options">
+                        <button class="options-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="post-image">
+                    <img src="{{ post.image }}" alt="Post by {{ post.user }}">
+                </div>
+                <div class="post-actions">
+                    <button class="action-btn like-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </button>
+                    <button class="action-btn comment-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    </button>
+                    <button class="action-btn share-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </div>
+                <div class="post-likes">{{ post.likes }} likes</div>
+                <div class="post-caption">
+                    <span class="username">{{ post.user }}</span> {{ post.caption }}
+                </div>
+                <div class="post-comments">
+                    {% for comment in post.comments %}
+                    <div class="comment">
+                        <span class="username">{{ comment.user }}</span> {{ comment.text }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="post-time">2 HOURS AGO</div>
+                <div class="add-comment">
+                    <input type="text" class="comment-input" placeholder="Add a comment...">
+                    <button class="post-comment-btn">Post</button>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <aside class="sidebar">
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=50" alt="User">
+                </div>
+                <div class="user-info">
+                    <div class="username">you_username</div>
+                    <div class="name">Your Name</div>
+                </div>
+            </div>
+            <div class="suggestions">
+                <div class="suggestions-header">
+                    <span>Suggestions For You</span>
+                    <a href="#">See All</a>
+                </div>
+                <div class="suggestions-list">
+                    <div class="suggestion">
+                        <div class="user-info">
+                            <div class="avatar">
+                                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=50" alt="User">
+                            </div>
+                            <div>
+                                <div class="username">user_one</div>
+                                <div class="suggestion-info">Followed by user_two</div>
+                            </div>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                    <div class="suggestion">
+                        <div class="user-info">
+                            <div class="avatar">
+                                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=50" alt="User">
+                            </div>
+                            <div>
+                                <div class="username">user_three</div>
+                                <div class="suggestion-info">New to Instagram</div>
+                            </div>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="links">
+                    <a href="#">About</a> · <a href="#">Help</a> · <a href="#">Press</a> · <a href="#">API</a> · <a href="#">Jobs</a> · <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Locations</a>
+                </div>
+                <div class="copyright">
+                    © 2025 INSTAFEED
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Sign In</h2>
+            <form id="auth-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn primary-btn">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notifications for feedback -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
